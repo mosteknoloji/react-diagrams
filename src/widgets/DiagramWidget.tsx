@@ -483,14 +483,14 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 					//the canvas was selected
 					if (model === null) {
 						//is it a multiple selection
-						if (!event.shiftKey) {
+						if (event.shiftKey) {
 							var relative = diagramEngine.getRelativePoint(event.clientX, event.clientY);
 							this.startFiringAction(new SelectingAction(relative.x, relative.y));
 						} else {
 							//its a drag the canvas event
+							diagramModel.clearSelection();
 							this.startFiringAction(new MoveCanvasAction(event.clientX, event.clientY, diagramModel));
 						}
-						diagramModel.clearSelection();
 					} else if (model.model instanceof PortModel) {
 						//its a port element, we want to drag a link
 						if (!this.props.diagramEngine.isModelLocked(model.model)) {

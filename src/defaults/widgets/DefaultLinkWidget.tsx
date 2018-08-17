@@ -305,8 +305,8 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 		// See @link{#isSmartRoutingApplicable()}.
 		if (paths.length === 0) {
 			if (points.length === 2) {
-				var isHorizontal = Math.abs(points[0].x - points[1].x) > Math.abs(points[0].y - points[1].y);
-				var xOrY = isHorizontal ? "x" : "y";
+				//var isHorizontal = Math.abs(points[0].x - points[1].x) > Math.abs(points[0].y - points[1].y);
+				var xOrY = "x"; //isHorizontal ? "x" : "y";
 
 				//draw the smoothing
 				//if the points are too close, just draw a straight line
@@ -317,17 +317,23 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 
 				var pointLeft = points[0];
 				var pointRight = points[1];
-
+				var maxCurvyness = this.props.link.curvyness;
+				var curvyness = Math.abs(pointRight.x - pointLeft.x);
+				if (curvyness > maxCurvyness) {
+					curvyness = maxCurvyness;
+				}
+				/*
 				//some defensive programming to make sure the smoothing is
 				//always in the right direction
 				if (pointLeft[xOrY] > pointRight[xOrY]) {
 					pointLeft = points[1];
 					pointRight = points[0];
 				}
+				*/
 
 				paths.push(
 					this.generateLink(
-						Toolkit.generateCurvePath(pointLeft, pointRight, this.props.link.curvyness),
+						Toolkit.generateCurvePath(pointLeft, pointRight, curvyness),
 						{
 							onMouseDown: event => {
 								this.addPointToLink(event, 1);
