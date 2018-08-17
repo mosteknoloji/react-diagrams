@@ -319,9 +319,12 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 				var pointRight = points[1];
 				var maxCurvyness = this.props.link.curvyness;
 				var curvyness = Math.abs(pointRight.x - pointLeft.x);
-				if (curvyness > maxCurvyness) {
+				if (curvyness > Math.abs(maxCurvyness)) {
 					curvyness = maxCurvyness;
+				} else {
+					curvyness *= Math.sign(maxCurvyness);
 				}
+
 				/*
 				//some defensive programming to make sure the smoothing is
 				//always in the right direction
