@@ -423,7 +423,6 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 		diagramEngine.setMaxNumberPointsPerLink(this.props.maxNumberPointsPerLink);
 		diagramEngine.setSmartRoutingStatus(this.props.smartRouting);
 		var diagramModel = diagramEngine.getDiagramModel();
-
 		return (
 			<div
 				{...this.getProps()}
@@ -446,14 +445,16 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
               */
 							scrollDelta /= 3;
 						} else {
-							scrollDelta /= 60;
+							scrollDelta /= 25;
 						}
 						if (diagramModel.getZoomLevel() + scrollDelta > 10) {
 							diagramModel.setZoomLevel(diagramModel.getZoomLevel() + scrollDelta);
+							if (diagramModel.getZoomLevel() > 100) {
+								diagramModel.setZoomLevel(100);
+							}
 						}
 
 						const zoomFactor = diagramModel.getZoomLevel() / 100;
-
 						const boundingRect = event.currentTarget.getBoundingClientRect();
 						const clientWidth = boundingRect.width;
 						const clientHeight = boundingRect.height;

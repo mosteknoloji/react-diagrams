@@ -113,6 +113,11 @@ export class NodeModel extends BaseModel<DiagramModel, BaseModelListener> {
 	}
 
 	removePort(port: PortModel) {
+		// remove connected links
+		for (let key in port.getLinks()) {
+			let link = port.getLinks()[key];
+			link.remove();
+		}
 		//clear the parent node reference
 		if (this.ports[port.name]) {
 			this.ports[port.name].setParent(null);

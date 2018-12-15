@@ -47,6 +47,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	nodesRendered: boolean;
 	maxNumberPointsPerLink: number;
 	smartRouting: boolean;
+	forceLinkUpdate: boolean;
 
 	// calculated only when smart routing is active
 	canvasMatrix: number[][] = [];
@@ -64,8 +65,8 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		this.labelFactories = {};
 		this.canvas = null;
 		this.paintableWidgets = null;
+		this.forceLinkUpdate = false;
 		this.linksThatHaveInitiallyRendered = {};
-
 		if (Toolkit.TESTING) {
 			Toolkit.TESTING_UID = 0;
 

@@ -40,10 +40,11 @@ export class LinkLayerWidget extends BaseWidget<LinkLayerProps, LinkLayerState> 
 				{//only perform these actions when we have a diagram
 				this.props.diagramEngine.canvas &&
 					_.map(diagramModel.getLinks(), link => {
-						if (
+						if (this.props.diagramEngine.forceLinkUpdate || (
 							this.props.diagramEngine.nodesRendered &&
-							!this.props.diagramEngine.linksThatHaveInitiallyRendered[link.id]
+							!this.props.diagramEngine.linksThatHaveInitiallyRendered[link.id])
 						) {
+							window.console.log("Link RENDER");
 							if (link.sourcePort !== null) {
 								try {
 									const portCenter = this.props.diagramEngine.getPortCenter(link.sourcePort);
