@@ -22,11 +22,13 @@ export class BaseEntity<T extends BaseListener = BaseListener> {
 	public listeners: { [s: string]: T };
 	public id: string;
 	public locked: boolean;
+	public readOnly: boolean;
 
 	constructor(id?: string) {
 		this.listeners = {};
 		this.id = id || Toolkit.UID();
 		this.locked = false;
+		this.readOnly = false;
 	}
 
 	getID() {
@@ -104,6 +106,10 @@ export class BaseEntity<T extends BaseListener = BaseListener> {
 		return this.locked;
 	}
 
+	public isReadOnly(): boolean {
+		return this.readOnly;
+	}
+
 	public setLocked(locked: boolean = true) {
 		this.locked = locked;
 		this.iterateListeners((listener, event) => {
@@ -111,5 +117,9 @@ export class BaseEntity<T extends BaseListener = BaseListener> {
 				listener.lockChanged({ ...event, locked: locked });
 			}
 		});
+	}
+
+	public setReadOnly(readOnly: boolean = true) {
+		this.readOnly = readOnly;
 	}
 }

@@ -302,8 +302,10 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 		if (this.props.deleteKeys.indexOf(event.keyCode) !== -1) {
 			_.forEach(this.props.diagramEngine.getDiagramModel().getSelectedItems(), element => {
 				//only delete items which are not locked
-				if (!this.props.diagramEngine.isModelLocked(element)) {
-					element.remove();
+				if (!this.props.diagramEngine.isModelLocked(element) && !this.props.diagramEngine.isModelReadOnly(element)) {
+					if (element instanceof PointModel && (element.getParent().sourcePort.getParent().isReadOnly() || 
+						element.getParent().targetPort.getParent().isReadOnly())) {}
+					else element.remove();
 				}
 			});
 			this.forceUpdate();

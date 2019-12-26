@@ -98,4 +98,8 @@ export class PortModel extends BaseModel<NodeModel, BaseModelListener> {
 	isLocked() {
 		return super.isLocked() || this.getParent().isLocked();
 	}
+
+	isReadOnly() {
+		return super.isReadOnly() || this.getParent().isReadOnly();
+	}
 }

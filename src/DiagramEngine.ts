@@ -129,6 +129,15 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		return model.isLocked();
 	}
 
+	isModelReadOnly(model: BaseEntity<BaseListener>) {
+		//always check the diagram model
+		if (this.diagramModel.isReadOnly()) {
+			return true;
+		}
+
+		return model.isReadOnly();
+	}
+
 	recalculatePortsVisually() {
 		this.nodesRendered = false;
 		this.linksThatHaveInitiallyRendered = {};
