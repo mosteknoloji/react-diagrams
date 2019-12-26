@@ -57,6 +57,7 @@ export declare class DiagramEngine extends BaseEntity<DiagramEngineListener> {
      * its parents to see if they are locked first
      */
     isModelLocked(model: BaseEntity<BaseListener>): boolean;
+    isModelReadOnly(model: BaseEntity<BaseListener>): boolean;
     recalculatePortsVisually(): void;
     canEntityRepaint(baseModel: BaseModel<BaseEntity, BaseModelListener>): boolean;
     setCanvas(canvas: Element | null): void;

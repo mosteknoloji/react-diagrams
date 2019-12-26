@@ -20,6 +20,7 @@ export declare class BaseEntity<T extends BaseListener = BaseListener> {
     };
     id: string;
     locked: boolean;
+    readOnly: boolean;
     constructor(id?: string);
     getID(): string;
     doClone(lookupTable: {
@@ -39,5 +40,7 @@ export declare class BaseEntity<T extends BaseListener = BaseListener> {
     removeListener(listener: string): boolean;
     addListener(listener: T): string;
     isLocked(): boolean;
+    isReadOnly(): boolean;
     setLocked(locked?: boolean): void;
+    setReadOnly(readOnly?: boolean): void;
 }

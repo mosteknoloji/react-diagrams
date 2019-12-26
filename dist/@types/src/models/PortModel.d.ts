@@ -44,4 +44,5 @@ export declare class PortModel extends BaseModel<NodeModel, BaseModelListener> {
     }): void;
     canLinkToPort(port: PortModel): boolean;
     isLocked(): boolean;
+    isReadOnly(): boolean;
 }
