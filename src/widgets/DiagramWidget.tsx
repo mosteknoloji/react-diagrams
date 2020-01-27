@@ -234,6 +234,8 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 
 				if (allSelected) {
 					link.setSelected(true);
+				}else{
+					link.setSelected(false)
 				}
 			});
 
